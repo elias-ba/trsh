@@ -116,7 +116,7 @@ case "$1" in
     "config")
         shift
         case "$1" in
-            "--grace-period")
+            "--rentention-period")
                 shift
                 set_grace_period "$1"
                 ;;
