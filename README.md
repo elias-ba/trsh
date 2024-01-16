@@ -1,4 +1,4 @@
-# trsh - delete with confidence, restore with Ease!
+# trsh - delete with confidence, restore with ease!
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
