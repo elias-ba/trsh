@@ -4,7 +4,6 @@ trash_dir="$HOME/.trashbin"
 metadata_file="$trash_dir/trash_metadata.txt"
 days_to_restore=7
 
-# Function to delete files
 delete_files() {
     for file in "$@"; do
         if [ -e "$file" ]; then
@@ -18,7 +17,6 @@ delete_files() {
     done
 }
 
-# Function to restore files
 restore_files() {
     if [ -n "$1" ]; then
         file_to_restore="$trash_dir/$(basename "$1")"
@@ -41,18 +39,15 @@ restore_files() {
     fi
 }
 
-# Function to list items in trash
 list_trash_items() {
     ls -l "$trash_dir"
 }
 
-# Function to empty the trash
 empty_trash() {
     rm -rf "$trash_dir"/*
     echo "Trash emptied."
 }
 
-# Function to purge old files
 purge_old_files() {
     current_time=$(date +%s)
     for file in "$trash_dir"/*; do
@@ -65,7 +60,6 @@ purge_old_files() {
     done
 }
 
-# Function to set grace period
 set_grace_period() {
     if [ -n "$1" ] && [ "$1" -eq "$1" ] 2>/dev/null; then
         days_to_restore="$1"
@@ -97,7 +91,6 @@ set_grace_period() {
     fi
 }
 
-# Main script logic
 case "$1" in
 "delete")
     shift
