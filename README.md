@@ -14,32 +14,6 @@
 - **Empty Trash:** Permanently delete all items in the trash bin.
 - **Automatic Purging:** Schedule automatic purging of old files beyond a specified grace period.
 
-## Installation
-
-### Debian-based Distributions (e.g., Ubuntu)
-
-```bash
-sudo dpkg -i trsh.deb
-```
-
-### RPM-based Distributions (e.g., Fedora)
-
-```bash
-sudo rpm -i trsh.rpm
-```
-
-### Arch Linux
-
-```bash
-makepkg -si
-```
-
-### macOS (Homebrew)
-
-```bash
-brew install ./trsh.rb
-```
-
 ## Usage
 
 ### Delete Files
