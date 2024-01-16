@@ -1,10 +1,10 @@
-# trsh 🗑️
+# trsh - delete with confidence, restore with Ease!
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Overview
 
-**trsh** is a lightweight and powerful command-line utility designed to simplify file management on Linux systems. It allows you to confidently delete files, restore them effortlessly, and keep your trash bin clutter-free with automatic purging.
+🗑️ **trsh** is a lightweight and powerful command-line utility designed to simplify file management on Linux systems. It allows you to confidently delete files, restore them effortlessly, and keep your trash bin clutter-free with automatic purging.
 
 ## Features
 
