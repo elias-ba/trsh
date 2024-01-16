@@ -11,7 +11,7 @@ delete_files() {
             abs_path=$(command -v realpath >/dev/null && realpath "$file" || echo "$(cd "$(dirname "$file")" && pwd -P)/$(basename "$file")")
             mv "$abs_path" "$trash_dir"
             echo "Deleted: $abs_path"
-            echo "$abs_path" >> "$metadata_file"
+            echo "$abs_path" >>"$metadata_file"
         else
             echo "File not found: $file"
         fi
@@ -37,7 +37,7 @@ restore_files() {
             else
                 echo "File not found in trash: $original_path"
             fi
-        done < "$metadata_file"
+        done <"$metadata_file"
     fi
 }
 
@@ -73,18 +73,21 @@ set_grace_period() {
 
         # Check for cron or systemd timers
         if command -v cron >/dev/null; then
-            (crontab -l 2>/dev/null; echo "0 0 * * * $PWD/trash_util.sh purge") | crontab -
+            (
+                crontab -l 2>/dev/null
+                echo "0 0 * * * $PWD/trsh.sh purge"
+            ) | crontab -
             echo "Cron job added for automatic purging."
         elif command -v systemctl >/dev/null && systemctl list-units --type=timer --quiet; then
-            echo "[Timer]" > "$HOME/.config/systemd/user/trash_util.timer"
-            echo "OnCalendar=daily" >> "$HOME/.config/systemd/user/trash_util.timer"
-            echo "Unit=trash_util.service" >> "$HOME/.config/systemd/user/trash_util.timer"
+            echo "[Timer]" >"$HOME/.config/systemd/user/trsh.timer"
+            echo "OnCalendar=daily" >>"$HOME/.config/systemd/user/trsh.timer"
+            echo "Unit=trsh.service" >>"$HOME/.config/systemd/user/trsh.timer"
 
-            echo "[Unit]" > "$HOME/.config/systemd/user/trash_util.service"
-            echo "Description=Trash Util Automatic Purge" >> "$HOME/.config/systemd/user/trash_util.service"
-            echo "ExecStart=$PWD/trash_util.sh purge" >> "$HOME/.config/systemd/user/trash_util.service"
+            echo "[Unit]" >"$HOME/.config/systemd/user/trsh.service"
+            echo "Description=Trash Util Automatic Purge" >>"$HOME/.config/systemd/user/trsh.service"
+            echo "ExecStart=$PWD/trsh.sh purge" >>"$HOME/.config/systemd/user/trsh.service"
 
-            systemctl --user enable --now trash_util.timer
+            systemctl --user enable --now trsh.timer
             echo "Systemd timer added for automatic purging."
         else
             echo "Neither cron nor systemd timers found. Automatic purging not supported on this system."
@@ -96,40 +99,40 @@ set_grace_period() {
 
 # Main script logic
 case "$1" in
-    "delete")
+"delete")
+    shift
+    delete_files "$@"
+    ;;
+"restore")
+    shift
+    restore_files "$@"
+    ;;
+"list")
+    list_trash_items
+    ;;
+"empty")
+    empty_trash
+    ;;
+"purge")
+    purge_old_files
+    ;;
+"config")
+    shift
+    case "$1" in
+    "--rentention-period")
         shift
-        delete_files "$@"
-        ;;
-    "restore")
-        shift
-        restore_files "$@"
-        ;;
-    "list")
-        list_trash_items
-        ;;
-    "empty")
-        empty_trash
-        ;;
-    "purge")
-        purge_old_files
-        ;;
-    "config")
-        shift
-        case "$1" in
-            "--rentention-period")
-                shift
-                set_grace_period "$1"
-                ;;
-            *)
-                echo "Invalid config option. Usage: trash_util.sh config --grace-period days"
-                exit 1
-                ;;
-        esac
+        set_grace_period "$1"
         ;;
     *)
-        echo "Usage: trash_util.sh [delete file1 file2 ... | restore [file] | list | empty | purge | config --grace-period days]"
+        echo "Invalid config option. Usage: trsh config --retention-period days"
         exit 1
         ;;
+    esac
+    ;;
+*)
+    echo "Usage: trsh [delete file1 file2 ... | restore [file] | list | empty | purge | config --retention-period days]"
+    exit 1
+    ;;
 esac
 
 exit 0
