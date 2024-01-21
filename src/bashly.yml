@@ -1,0 +1,68 @@
+name: trsh
+help: delete with confidence, restore with ease!
+version: 0.1.0
+
+commands:
+- name: list
+  alias: l
+  help: List all the files of the trash directory
+
+  flags:
+    - long: --name
+      short: -n
+      arg: name
+      required: false
+      help: A wildcard for matching orginal basename files
+
+    - long: --tname
+      short: -t
+      arg: tname
+      required: false
+      help: A wildcard for matching trash basename files
+ 
+    - long: --origin
+      short: -o
+      arg: origin
+      required: false
+      help: A wildcard for matching original directory path
+
+  examples:
+    - trsh list
+    - trsh list "*"
+    - trsh list "*.txt"
+
+- name: move
+  alias: m
+  help: Move a set of files to the trash
+  args:
+  - name: file
+    repeatable: true
+    unique: true
+    required: true
+    help: One or more files to move to the trash
+  examples:
+    - trsh move component.jsx index.php
+    - trsh move "*.html"
+
+- name: restore
+  alias: r
+  help: Restore a set of files to the trash
+
+  flags:
+    - long: --tname
+      short: -t
+      arg: tname
+      help: A wildcard for matching trash basename files
+
+    - long: --origin
+      short: -o
+      arg: origin
+      help: A wildcard for matching orginal directory
+
+  examples:
+    - trsh restore component.jsx index.php
+    - trsh restore "*.html"
+
+- name: empty
+  alias: e
+  help: Empty the trash after confirmation.

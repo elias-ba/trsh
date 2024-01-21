@@ -2,6 +2,22 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+## Requirements
+
+- [**Bashly**](https://bashly.dannyb.co/installation/)
+- [**Ruby**](https://www.ruby-lang.org/fr/documentation/installation/)
+- [**JQ**](https://jqlang.github.io/jq/download/)
+
+## Installation
+
+Execute the **installation.sh** script.
+
+## Update
+
+Excute the **update.sh** script to get the last updates of this command-line tool.
+This script is also useful for contributors who make changes for the different commands source code and want to apply those changes in their local machine.
+If you encounter a problem after the update, clone again the repo and run the **installation.sh**
+
 ## Overview
 
 🗑️ **trsh** is a lightweight and powerful command-line utility designed to simplify file management on Linux systems. It allows you to confidently delete files, restore them effortlessly, and keep your trash bin clutter-free with automatic purging.
