@@ -1,9 +1,10 @@
-# 🗑️ trsh - Delete with Confidence, Restore with Ease
+# 🗑️ trsh
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
 
-> A world-class trash utility that makes file deletion safe, recoverable, and intelligent.
+_Delete with Confidence, Restore with Ease_
+> A trash utility that makes file deletion safe, recoverable, and intelligent.
 
 **Ever accidentally deleted the wrong file?** With `trsh`, you can delete with confidence knowing you can always restore. Unlike `rm`, `trsh` gives you a safety net.
 
