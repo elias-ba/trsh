@@ -144,7 +144,7 @@ python trsh.py --help
 
 ### Project Structure
 
-```
+```bash
 trsh/
 ├── trsh.py              # Main implementation
 ├── test_trsh.py         # Test suite
@@ -234,7 +234,7 @@ def restore_file(self, pattern: str, output: Optional[Path] = None) -> int:
 
 ### Commit Message Format
 
-```
+```bash
 <type>(<scope>): <subject>
 
 <body>
