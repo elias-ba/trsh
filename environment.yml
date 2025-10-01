@@ -1,0 +1,28 @@
+name: trsh
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python
+  - python=3.11
+  
+  # Core tools
+  - pip>=23.0
+  
+  # Testing
+  - pytest>=7.4
+  - pytest-cov>=4.1
+  
+  # Code quality
+  - black>=23.7
+  - pylint>=2.17
+  - mypy>=1.5
+  
+  # Optional enhancements via pip
+  - pip:
+      - rich>=13.5  # Beautiful terminal output (optional)
+
+# Note: trsh has ZERO runtime dependencies!
+# All packages above are for development only.
+# trsh uses only Python 3.7+ standard library.
